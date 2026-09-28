@@ -40,215 +40,236 @@
 </head>
 
 <body>
-  <h1>Sistema TURYBUS</h1>
+  <!-- 1. PANTALLA DE LOGIN -->
+  <div id="vista-login"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #1a1a1a; color: white;">
+    <h2 style="margin-bottom: 20px;">🔒 Sistema TURYBUS - Acceso Restringido</h2>
+    <form id="form-login"
+      style="display: flex; flex-direction: column; gap: 15px; background: #333; padding: 30px; border-radius: 8px; width: 300px;">
+      <input type="email" id="email-login" placeholder="Correo electrónico" required
+        style="padding: 10px; border-radius: 4px; border: none; font-size: 14px;">
+      <input type="password" id="password-login" placeholder="Contraseña" required
+        style="padding: 10px; border-radius: 4px; border: none; font-size: 14px;">
+      <button type="submit"
+        style="padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Ingresar</button>
+    </form>
+  </div>
+  <!-- 2. CONTENEDOR DE LA APP (Oculto por defecto) -->
+  <div id="app-contenedor" style="display: none;">
 
-  <!-- ========================================== -->
-  <!-- VISTA 0: MENÚ PRINCIPAL                    -->
-  <!-- ========================================== -->
-  <div id="vista-menu" class="vista activa">
-    <h2>¿Qué deseas hacer?</h2>
-    <div class="menu-principal">
-      <button id="nav-ventas">🎟️ Área de Ventas (Boletos)</button>
-      <button id="nav-operaciones">🗺️ Área de Operaciones (Rutas)</button>
-      <button id="nav-flota">🚌 Área de Flota y Mantenimiento</button>
+    <!-- Botón para cerrar sesión (Puedes ponerlo en el header de tu menú principal) -->
+    <button id="btn-logout"
+      style="position: absolute; top: 15px; right: 20px; padding: 6px 12px; background: #ff4d4d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cerrar
+      Sesión</button>
+    <h1>Sistema TURYBUS</h1>
+
+    <!-- ========================================== -->
+    <!-- VISTA 0: MENÚ PRINCIPAL                    -->
+    <!-- ========================================== -->
+    <div id="vista-menu" class="vista activa">
+      <h2>¿Qué deseas hacer?</h2>
+      <div class="menu-principal">
+        <button id="nav-ventas">🎟️ Área de Ventas (Boletos)</button>
+        <button id="nav-operaciones">🗺️ Área de Operaciones (Rutas)</button>
+        <button id="nav-flota">🚌 Área de Flota y Mantenimiento</button>
+      </div>
     </div>
-  </div>
 
-  <!-- ========================================== -->
-  <!-- VISTA 1: VENTAS                            -->
-  <!-- ========================================== -->
-  <div id="vista-ventas" class="vista">
-    <button class="btn-volver">← Volver al Menú Principal</button>
+    <!-- ========================================== -->
+    <!-- VISTA 1: VENTAS                            -->
+    <!-- ========================================== -->
+    <div id="vista-ventas" class="vista">
+      <button class="btn-volver">← Volver al Menú Principal</button>
 
-    <section>
-      <h2>Registrar Pasajero</h2>
-      <form id="form-pasajero">
-        <input type="text" id="dni-pasajero" placeholder="DNI/Pasaporte" required />
-        <input type="text" id="nombre-pasajero" placeholder="Nombre Completo" required />
-        <input type="text" id="tel-pasajero" placeholder="Teléfono" required />
-        <button type="submit">Guardar Pasajero</button>
-      </form>
-    </section>
-    <section>
-      <h2>Lista de Pasajeros</h2>
-      <ul id="lista-pasajeros">
-        <li>Cargando pasajeros...</li>
-      </ul>
-    </section>
-    <hr>
-    <section>
-      <h2>Vender Billete</h2>
-      <form id="form-billete">
-        <select id="select-pasajero" required>
-          <option value="">Seleccione Pasajero...</option>
-        </select>
-        <select id="select-servicio-billete" required>
-          <option value="">Seleccione Viaje...</option>
-        </select>
-        <input type="date" id="fecha-viaje" required title="Fecha del viaje" />
-        <input type="time" id="hora-llegada-prevista" required title="Hora de llegada prevista" />
-        <button type="submit">Emitir Billete</button>
-      </form>
-    </section>
-    <section>
-      <h2>Billetes Vendidos</h2>
-      <ul id="lista-billetes">
-        <li>Cargando billetes...</li>
-      </ul>
-    </section>
-  </div>
+      <section>
+        <h2>Registrar Pasajero</h2>
+        <form id="form-pasajero">
+          <input type="text" id="dni-pasajero" placeholder="DNI/Pasaporte" required />
+          <input type="text" id="nombre-pasajero" placeholder="Nombre Completo" required />
+          <input type="text" id="tel-pasajero" placeholder="Teléfono" required />
+          <button type="submit">Guardar Pasajero</button>
+        </form>
+      </section>
+      <section>
+        <h2>Lista de Pasajeros</h2>
+        <ul id="lista-pasajeros">
+          <li>Cargando pasajeros...</li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h2>Vender Billete</h2>
+        <form id="form-billete">
+          <select id="select-pasajero" required>
+            <option value="">Seleccione Pasajero...</option>
+          </select>
+          <select id="select-servicio-billete" required>
+            <option value="">Seleccione Viaje...</option>
+          </select>
+          <input type="date" id="fecha-viaje" required title="Fecha del viaje" />
+          <input type="time" id="hora-llegada-prevista" required title="Hora de llegada prevista" />
+          <button type="submit">Emitir Billete</button>
+        </form>
+      </section>
+      <section>
+        <h2>Billetes Vendidos</h2>
+        <ul id="lista-billetes">
+          <li>Cargando billetes...</li>
+        </ul>
+      </section>
+    </div>
 
-  <!-- ========================================== -->
-  <!-- VISTA 2: OPERACIONES                       -->
-  <!-- ========================================== -->
-  <div id="vista-operaciones" class="vista">
-    <button class="btn-volver">← Volver al Menú Principal</button>
+    <!-- ========================================== -->
+    <!-- VISTA 2: OPERACIONES                       -->
+    <!-- ========================================== -->
+    <div id="vista-operaciones" class="vista">
+      <button class="btn-volver">← Volver al Menú Principal</button>
 
-    <section>
-      <h2>Registrar Nueva Ruta</h2>
-      <form id="form-ruta">
-        <input type="text" id="nombre-ruta" placeholder="Nombre (Ej. Ruta Histórica)" required />
-        <input type="number" id="precio-ruta" placeholder="Importe fijo ($)" step="0.01" required />
-        <button type="submit">Guardar Ruta</button>
-      </form>
-    </section>
-    <section>
-      <h2>Rutas Activas</h2>
-      <ul id="lista-rutas">
-        <li>Cargando rutas...</li>
-      </ul>
-    </section>
-    <hr>
-    <section>
-      <h2>Registrar Lugar en Itinerario</h2>
-      <form id="form-lugar">
-        <select id="select-ruta-lugar" required>
-          <option value="">Seleccione la Ruta...</option>
-        </select>
-        <input type="number" id="orden-lugar" placeholder="Orden (Ej. 1, 2...)" required />
-        <input type="text" id="nombre-lugar" placeholder="Nombre del lugar" required />
-        <input type="text" id="actividad-lugar" placeholder="Actividad" />
-        <input type="time" id="tiempo-desde" step="1" required title="Tiempo desde salida" />
-        <input type="time" id="tiempo-parada" step="1" title="Tiempo de parada" />
-        <button type="submit">Agregar Lugar</button>
-      </form>
-    </section>
-    <section>
-      <h2>Itinerarios Guardados</h2>
-      <ul id="lista-lugares">
-        <li>Cargando lugares...</li>
-      </ul>
-    </section>
-    <hr>
-    <section>
-      <h2>Programar Servicio Diario</h2>
-      <form id="form-servicio">
-        <select id="select-ruta" required>
-          <option value="">Seleccione Ruta...</option>
-        </select>
-        <select id="select-autobus" required>
-          <option value="">Seleccione Autobús...</option>
-        </select>
-        <select id="select-conductor" required>
-          <option value="">Seleccione Conductor...</option>
-        </select>
-        <input type="time" id="hora-salida" required />
-        <select id="dias-prog" required>
-          <option value="">Seleccione los días...</option>
-          <option value="Lunes a Domingo">Lunes a Domingo (Diario)</option>
-          <option value="Lunes a Viernes">Lunes a Viernes</option>
-          <option value="Fines de Semana">Fines de Semana</option>
-        </select>
-        <button type="submit">Programar Servicio</button>
-      </form>
-    </section>
-    <section>
-      <h2>Servicios Programados</h2>
-      <ul id="lista-servicios">
-        <li>Cargando servicios...</li>
-      </ul>
-    </section>
-  </div>
+      <section>
+        <h2>Registrar Nueva Ruta</h2>
+        <form id="form-ruta">
+          <input type="text" id="nombre-ruta" placeholder="Nombre (Ej. Ruta Histórica)" required />
+          <input type="number" id="precio-ruta" placeholder="Importe fijo ($)" step="0.01" required />
+          <button type="submit">Guardar Ruta</button>
+        </form>
+      </section>
+      <section>
+        <h2>Rutas Activas</h2>
+        <ul id="lista-rutas">
+          <li>Cargando rutas...</li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h2>Registrar Lugar en Itinerario</h2>
+        <form id="form-lugar">
+          <select id="select-ruta-lugar" required>
+            <option value="">Seleccione la Ruta...</option>
+          </select>
+          <input type="number" id="orden-lugar" placeholder="Orden (Ej. 1, 2...)" required />
+          <input type="text" id="nombre-lugar" placeholder="Nombre del lugar" required />
+          <input type="text" id="actividad-lugar" placeholder="Actividad" />
+          <input type="time" id="tiempo-desde" step="1" required title="Tiempo desde salida" />
+          <input type="time" id="tiempo-parada" step="1" title="Tiempo de parada" />
+          <button type="submit">Agregar Lugar</button>
+        </form>
+      </section>
+      <section>
+        <h2>Itinerarios Guardados</h2>
+        <ul id="lista-lugares">
+          <li>Cargando lugares...</li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h2>Programar Servicio Diario</h2>
+        <form id="form-servicio">
+          <select id="select-ruta" required>
+            <option value="">Seleccione Ruta...</option>
+          </select>
+          <select id="select-autobus" required>
+            <option value="">Seleccione Autobús...</option>
+          </select>
+          <select id="select-conductor" required>
+            <option value="">Seleccione Conductor...</option>
+          </select>
+          <input type="time" id="hora-salida" required />
+          <select id="dias-prog" required>
+            <option value="">Seleccione los días...</option>
+            <option value="Lunes a Domingo">Lunes a Domingo (Diario)</option>
+            <option value="Lunes a Viernes">Lunes a Viernes</option>
+            <option value="Fines de Semana">Fines de Semana</option>
+          </select>
+          <button type="submit">Programar Servicio</button>
+        </form>
+      </section>
+      <section>
+        <h2>Servicios Programados</h2>
+        <ul id="lista-servicios">
+          <li>Cargando servicios...</li>
+        </ul>
+      </section>
+    </div>
 
-  <!-- ========================================== -->
-  <!-- VISTA 3: FLOTA Y PERSONAL                  -->
-  <!-- ========================================== -->
-  <div id="vista-flota" class="vista">
-    <button class="btn-volver">← Volver al Menú Principal</button>
+    <!-- ========================================== -->
+    <!-- VISTA 3: FLOTA Y PERSONAL                  -->
+    <!-- ========================================== -->
+    <div id="vista-flota" class="vista">
+      <button class="btn-volver">← Volver al Menú Principal</button>
 
-    <section>
-      <h2>Registrar Autobús</h2>
-      <form id="form-autobus">
-        <input type="text" id="matricula-bus" placeholder="Matrícula" required />
-        <input type="text" id="modelo-bus" placeholder="Modelo" required />
-        <input type="text" id="fabricante-bus" placeholder="Fabricante" required />
-        <input type="number" id="plazas-bus" placeholder="N° plazas" required />
-        <button type="submit">Guardar Autobús</button>
-      </form>
-    </section>
-    <section>
-      <h2>Flota de Autobuses</h2>
-      <ul id="lista-autobuses">
-        <li>Cargando autobuses...</li>
-      </ul>
-    </section>
-    <hr>
-    <section>
-      <h2>Registrar Conductor</h2>
-      <form id="form-conductor">
-        <input type="text" id="dni-conductor" placeholder="DNI" required />
-        <input type="text" id="nombre-conductor" placeholder="Nombre Completo" required />
-        <input type="text" id="tel-conductor" placeholder="Teléfono" required />
-        <input type="text" id="dir-conductor" placeholder="Dirección" required />
-        <button type="submit">Guardar Conductor</button>
-      </form>
-    </section>
-    <section>
-      <h2>Plantilla de Conductores</h2>
-      <ul id="lista-conductores">
-        <li>Cargando conductores...</li>
-      </ul>
-    </section>
-    <hr>
-    <section>
-      <h2>Registrar Revisión Técnica</h2>
-      <form id="form-revision">
-        <select id="select-bus-rev" required>
-          <option value="">Seleccione Autobús...</option>
-        </select>
-        <input type="date" id="fecha-rev" required />
-        <input type="text" id="diag-rev" placeholder="Diagnóstico" required />
-        <button type="submit">Guardar Revisión</button>
-      </form>
-    </section>
-    <section>
-      <h2>Historial de Revisiones</h2>
-      <ul id="lista-revisiones">
-        <li>Cargando revisiones...</li>
-      </ul>
-    </section>
-    <hr>
-    <section>
-      <h2>Registrar Reparación</h2>
-      <form id="form-reparacion">
-        <select id="select-rev-rep" required>
-          <option value="">Seleccione Revisión...</option>
-        </select>
-        <input type="text" id="codigo-rep" placeholder="Código (Ej. REP-001)" required />
-        <input type="time" id="tiempo-rep" step="1" required />
-        <input type="text" id="comentario-rep" placeholder="Comentarios del mecánico" />
-        <button type="submit">Agregar Reparación</button>
-      </form>
-    </section>
-    <section>
-      <h2>Detalle de Reparaciones</h2>
-      <ul id="lista-reparaciones">
-        <li>Cargando reparaciones...</li>
-      </ul>
-    </section>
-  </div>
+      <section>
+        <h2>Registrar Autobús</h2>
+        <form id="form-autobus">
+          <input type="text" id="matricula-bus" placeholder="Matrícula" required />
+          <input type="text" id="modelo-bus" placeholder="Modelo" required />
+          <input type="text" id="fabricante-bus" placeholder="Fabricante" required />
+          <input type="number" id="plazas-bus" placeholder="N° plazas" required />
+          <button type="submit">Guardar Autobús</button>
+        </form>
+      </section>
+      <section>
+        <h2>Flota de Autobuses</h2>
+        <ul id="lista-autobuses">
+          <li>Cargando autobuses...</li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h2>Registrar Conductor</h2>
+        <form id="form-conductor">
+          <input type="text" id="dni-conductor" placeholder="DNI" required />
+          <input type="text" id="nombre-conductor" placeholder="Nombre Completo" required />
+          <input type="text" id="tel-conductor" placeholder="Teléfono" required />
+          <input type="text" id="dir-conductor" placeholder="Dirección" required />
+          <button type="submit">Guardar Conductor</button>
+        </form>
+      </section>
+      <section>
+        <h2>Plantilla de Conductores</h2>
+        <ul id="lista-conductores">
+          <li>Cargando conductores...</li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h2>Registrar Revisión Técnica</h2>
+        <form id="form-revision">
+          <select id="select-bus-rev" required>
+            <option value="">Seleccione Autobús...</option>
+          </select>
+          <input type="date" id="fecha-rev" required />
+          <input type="text" id="diag-rev" placeholder="Diagnóstico" required />
+          <button type="submit">Guardar Revisión</button>
+        </form>
+      </section>
+      <section>
+        <h2>Historial de Revisiones</h2>
+        <ul id="lista-revisiones">
+          <li>Cargando revisiones...</li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h2>Registrar Reparación</h2>
+        <form id="form-reparacion">
+          <select id="select-rev-rep" required>
+            <option value="">Seleccione Revisión...</option>
+          </select>
+          <input type="text" id="codigo-rep" placeholder="Código (Ej. REP-001)" required />
+          <input type="time" id="tiempo-rep" step="1" required />
+          <input type="text" id="comentario-rep" placeholder="Comentarios del mecánico" />
+          <button type="submit">Agregar Reparación</button>
+        </form>
+      </section>
+      <section>
+        <h2>Detalle de Reparaciones</h2>
+        <ul id="lista-reparaciones">
+          <li>Cargando reparaciones...</li>
+        </ul>
+      </section>
+    </div>
 
-  <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
