@@ -1,3 +1,5 @@
+import { supabase } from '../supabase.js';
+
 import { cargarRutas, cargarLugares, cargarServicios, initOperaciones } from './modulos/operaciones.js';
 import { cargarAutobuses, cargarConductores, cargarRevisiones, cargarReparaciones, initFlota } from './modulos/flota.js';
 import { cargarPasajeros, cargarBilletes, initVentas } from './modulos/ventas.js';
