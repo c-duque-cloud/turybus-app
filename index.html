@@ -10,254 +10,248 @@
 
 <body>
 
-  <!-- Menú de Navegación -->
-  <nav class="navbar">
-    <div class="logo">🚌 TURYBUS</div>
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="hamburger">&#9776;</label>
+  <!-- ==========================================
+         VISTA DE LOGIN (Restaurada)
+         ========================================== -->
+  <div id="vista-login" class="login-container">
+    <div class="card login-card">
+      <h2>🚌 TURYBUS ERP</h2>
+      <form id="form-login" class="custom-form">
+        <input type="email" id="email-login" class="input-login" placeholder="Correo Electrónico" required>
+        <input type="password" id="password-login" class="input-login" placeholder="Contraseña" required>
+        <button type="submit" class="btn-primary" style="width: 100%;">Iniciar Sesión</button>
+      </form>
+    </div>
+  </div>
 
-    <ul class="nav-links">
-      <li><a href="#" data-target="dashboard" class="nav-item active">Dashboard</a></li>
-      <li><a href="#" data-target="ventas" class="nav-item">Ventas</a></li>
-      <li><a href="#" data-target="flota" class="nav-item">Flota</a></li>
-      <li><a href="#" data-target="operaciones" class="nav-item">Operaciones</a></li>
-    </ul>
-  </nav>
+  <!-- ==========================================
+         CONTENEDOR DE LA APLICACIÓN
+         ========================================== -->
+  <div id="app-contenedor" style="display: none;">
 
-  <!-- Contenedor Principal -->
-  <main class="main-content">
+    <nav class="navbar">
+      <div class="logo">🚌 TURYBUS</div>
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
 
-    <!-- ==========================================
-             MÓDULO 1: DASHBOARD
-             ========================================== -->
-    <section id="dashboard" class="content-section active">
-      <header class="section-header">
-        <h1>Estado de Operaciones</h1>
-        <p>Monitoreo en tiempo real de disponibilidad y ventas.</p>
-      </header>
-      <div class="status-cards">
-        <div class="card border-green">
-          <h3>Autobuses en Base</h3>
-          <p class="number">12</p>
-          <span class="badge success">Disponibles</span>
+      <ul class="nav-links">
+        <li><a href="#" data-target="dashboard" class="nav-item active">Dashboard</a></li>
+        <li><a href="#" data-target="ventas" class="nav-item">Ventas</a></li>
+        <li><a href="#" data-target="flota" class="nav-item">Flota</a></li>
+        <li><a href="#" data-target="operaciones" class="nav-item">Operaciones</a></li>
+        <!-- Botón de logout con el ID original que tu JS necesita -->
+        <li><a href="#" id="btn-logout" class="btn-logout">Cerrar Sesión</a></li>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <!-- MÓDULO 1: DASHBOARD -->
+      <section id="dashboard" class="content-section active">
+        <header class="section-header">
+          <h1>Estado de Operaciones</h1>
+          <p>Monitoreo en tiempo real de disponibilidad y ventas.</p>
+        </header>
+        <div class="status-cards">
+          <div class="card border-green">
+            <h3>Autobuses en Base</h3>
+            <p class="number">12</p><span class="badge success">Disponibles</span>
+          </div>
+          <div class="card border-yellow">
+            <h3>Autobuses en Ruta</h3>
+            <p class="number">8</p><span class="badge warning">Operando</span>
+          </div>
+          <div class="card border-blue">
+            <h3>Asientos Libres (Hoy)</h3>
+            <p class="number">145</p><span class="badge info">Listos para venta</span>
+          </div>
+          <div class="card border-dark">
+            <h3>Boletos Vendidos</h3>
+            <p class="number">320</p><span class="badge primary">Corte actual</span>
+          </div>
         </div>
-        <div class="card border-yellow">
-          <h3>Autobuses en Ruta</h3>
-          <p class="number">8</p>
-          <span class="badge warning">Operando</span>
+      </section>
+
+      <!-- MÓDULO 2: VENTAS -->
+      <section id="ventas" class="content-section">
+        <header class="section-header">
+          <h1>Área de Ventas</h1>
+          <p>Gestión de clientes y emisión de boletos.</p>
+        </header>
+        <div class="card form-card">
+          <h3>Registrar Pasajero</h3>
+          <form id="form-pasajero" class="custom-form">
+            <div class="input-row">
+              <input type="text" id="dni-pasajero" placeholder="DNI/Pasaporte" required>
+              <input type="text" id="nombre-pasajero" placeholder="Nombre Completo" required>
+              <input type="text" id="tel-pasajero" placeholder="Teléfono" required>
+            </div>
+            <button type="submit" class="btn-primary">Guardar Pasajero</button>
+          </form>
         </div>
-        <div class="card border-blue">
-          <h3>Asientos Libres (Hoy)</h3>
-          <p class="number">145</p>
-          <span class="badge info">Listos para venta</span>
+        <div class="card list-card mt-2">
+          <ul id="lista-pasajeros" class="data-list"></ul>
         </div>
-        <div class="card border-dark">
-          <h3>Boletos Vendidos</h3>
-          <p class="number">320</p>
-          <span class="badge primary">Corte actual</span>
+
+        <div class="card form-card mt-2">
+          <h3>Vender Billete</h3>
+          <form id="form-billete" class="custom-form">
+            <div class="input-row">
+              <select id="select-pasajero" required>
+                <option value="">Seleccione Pasajero...</option>
+              </select>
+              <select id="select-servicio-billete" required>
+                <option value="">Seleccione Viaje...</option>
+              </select>
+              <input type="date" id="fecha-viaje" required>
+              <input type="time" id="hora-llegada-prevista" required>
+            </div>
+            <button type="submit" class="btn-primary">Emitir Billete</button>
+          </form>
         </div>
-      </div>
-    </section>
+        <div class="card list-card mt-2">
+          <ul id="lista-billetes" class="data-list"></ul>
+        </div>
+      </section>
 
-    <!-- ==========================================
-             MÓDULO 2: VENTAS (Pasajeros y Billetes)
-             ========================================== -->
-    <section id="ventas" class="content-section">
-      <header class="section-header">
-        <h1>Área de Ventas</h1>
-        <p>Gestión de clientes y emisión de boletos.</p>
-      </header>
+      <!-- MÓDULO 3: FLOTA -->
+      <section id="flota" class="content-section">
+        <header class="section-header">
+          <h1>Gestión de Flota</h1>
+          <p>Administración de unidades, personal y mantenimiento.</p>
+        </header>
+        <div class="card form-card">
+          <h3>Registrar Autobús</h3>
+          <form id="form-autobus" class="custom-form">
+            <div class="input-row">
+              <input type="text" id="matricula-bus" placeholder="Matrícula" required>
+              <input type="text" id="modelo-bus" placeholder="Modelo" required>
+              <input type="text" id="fabricante-bus" placeholder="Fabricante" required>
+              <input type="number" id="plazas-bus" placeholder="No. Plazas" required>
+            </div>
+            <button type="submit" class="btn-primary">Guardar Autobús</button>
+          </form>
+        </div>
+        <div class="card list-card mt-2">
+          <ul id="lista-autobuses" class="data-list"></ul>
+        </div>
 
-      <!-- Submódulo: Pasajeros -->
-      <div class="card form-card">
-        <h3>Registrar Pasajero</h3>
-        <form id="form-pasajero" class="custom-form">
-          <div class="input-row">
-            <input type="text" id="dni-pasajero" placeholder="DNI/Pasaporte" required>
-            <input type="text" id="nombre-pasajero" placeholder="Nombre Completo" required>
-            <input type="text" id="tel-pasajero" placeholder="Teléfono" required>
-          </div>
-          <button type="submit" class="btn-primary">Guardar Pasajero</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-pasajeros" class="data-list"></ul>
-      </div>
+        <div class="card form-card mt-2">
+          <h3>Registrar Conductor</h3>
+          <form id="form-conductor" class="custom-form">
+            <div class="input-row">
+              <input type="text" id="dni-conductor" placeholder="DNI" required>
+              <input type="text" id="nombre-conductor" placeholder="Nombre Completo" required>
+              <input type="text" id="tel-conductor" placeholder="Teléfono" required>
+              <input type="text" id="dir-conductor" placeholder="Dirección" required>
+            </div>
+            <button type="submit" class="btn-primary">Guardar Conductor</button>
+          </form>
+        </div>
+        <div class="card list-card mt-2">
+          <ul id="lista-conductores" class="data-list"></ul>
+        </div>
 
-      <!-- Submódulo: Billetes -->
-      <div class="card form-card mt-2">
-        <h3>Vender Billete</h3>
-        <form id="form-billete" class="custom-form">
-          <div class="input-row">
-            <select id="select-pasajero" required>
-              <option value="">Seleccione Pasajero...</option>
-            </select>
-            <select id="select-servicio-billete" required>
-              <option value="">Seleccione Viaje...</option>
-            </select>
-            <input type="date" id="fecha-viaje" required>
-            <input type="time" id="hora-llegada-prevista" required>
-          </div>
-          <button type="submit" class="btn-primary">Emitir Billete</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-billetes" class="data-list"></ul>
-      </div>
-    </section>
+        <div class="card form-card mt-2">
+          <h3>Registrar Revisión Técnica</h3>
+          <form id="form-revision" class="custom-form">
+            <div class="input-row">
+              <select id="select-bus-rev" required>
+                <option value="">Seleccione Autobús...</option>
+              </select>
+              <input type="date" id="fecha-rev" required>
+              <input type="text" id="diag-rev" placeholder="Diagnóstico" required>
+            </div>
+            <button type="submit" class="btn-primary">Guardar Revisión</button>
+          </form>
+        </div>
+        <div class="card list-card mt-2">
+          <ul id="lista-revisiones" class="data-list"></ul>
+        </div>
 
-    <!-- ==========================================
-             MÓDULO 3: FLOTA (Autobuses, Conductores, Mantenimiento)
-             ========================================== -->
-    <section id="flota" class="content-section">
-      <header class="section-header">
-        <h1>Gestión de Flota</h1>
-        <p>Administración de unidades, personal y mantenimiento.</p>
-      </header>
+        <div class="card form-card mt-2">
+          <h3>Registrar Reparación</h3>
+          <form id="form-reparacion" class="custom-form">
+            <div class="input-row">
+              <select id="select-rev-rep" required>
+                <option value="">Seleccione Revisión...</option>
+              </select>
+              <input type="text" id="codigo-rep" placeholder="Código" required>
+              <input type="text" id="tiempo-rep" placeholder="Tiempo empleado" required>
+              <input type="text" id="comentario-rep" placeholder="Comentarios">
+            </div>
+            <button type="submit" class="btn-primary">Guardar Reparación</button>
+          </form>
+        </div>
+        <div class="card list-card mt-2">
+          <ul id="lista-reparaciones" class="data-list"></ul>
+        </div>
+      </section>
 
-      <!-- Submódulo: Autobuses -->
-      <div class="card form-card">
-        <h3>Registrar Autobús</h3>
-        <form id="form-autobus" class="custom-form">
-          <div class="input-row">
-            <input type="text" id="matricula-bus" placeholder="Matrícula" required>
-            <input type="text" id="modelo-bus" placeholder="Modelo" required>
-            <input type="text" id="fabricante-bus" placeholder="Fabricante" required>
-            <input type="number" id="plazas-bus" placeholder="No. Plazas" required>
-          </div>
-          <button type="submit" class="btn-primary">Guardar Autobús</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-autobuses" class="data-list"></ul>
-      </div>
+      <!-- MÓDULO 4: OPERACIONES -->
+      <section id="operaciones" class="content-section">
+        <header class="section-header">
+          <h1>Operaciones y Logística</h1>
+          <p>Gestión de destinos, paradas y horarios.</p>
+        </header>
+        <div class="card form-card">
+          <h3>Registrar Ruta Comercial</h3>
+          <form id="form-ruta" class="custom-form">
+            <div class="input-row">
+              <input type="text" id="nombre-ruta" placeholder="Nombre de la Ruta" required>
+              <input type="number" step="0.01" id="precio-ruta" placeholder="Tarifa ($)" required>
+            </div>
+            <button type="submit" class="btn-primary">Guardar Ruta</button>
+          </form>
+        </div>
+        <div class="card list-card mt-2">
+          <ul id="lista-rutas" class="data-list"></ul>
+        </div>
 
-      <!-- Submódulo: Conductores -->
-      <div class="card form-card mt-2">
-        <h3>Registrar Conductor</h3>
-        <form id="form-conductor" class="custom-form">
-          <div class="input-row">
-            <input type="text" id="dni-conductor" placeholder="DNI" required>
-            <input type="text" id="nombre-conductor" placeholder="Nombre Completo" required>
-            <input type="text" id="tel-conductor" placeholder="Teléfono" required>
-            <input type="text" id="dir-conductor" placeholder="Dirección" required>
-          </div>
-          <button type="submit" class="btn-primary">Guardar Conductor</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-conductores" class="data-list"></ul>
-      </div>
+        <div class="card form-card mt-2">
+          <h3>Registrar Parada / Lugar</h3>
+          <form id="form-lugar" class="custom-form">
+            <div class="input-row">
+              <select id="select-ruta-lugar" required>
+                <option value="">Seleccione la Ruta...</option>
+              </select>
+              <input type="number" id="orden-lugar" placeholder="Orden" required>
+              <input type="text" id="nombre-lugar" placeholder="Nombre del Lugar" required>
+              <input type="text" id="actividad-lugar" placeholder="Actividad">
+              <input type="time" id="tiempo-desde" required>
+              <input type="time" id="tiempo-parada">
+            </div>
+            <button type="submit" class="btn-primary">Guardar Parada</button>
+          </form>
+        </div>
+        <div class="card list-card mt-2">
+          <ul id="lista-lugares" class="data-list"></ul>
+        </div>
 
-      <!-- Submódulo: Revisiones -->
-      <div class="card form-card mt-2">
-        <h3>Registrar Revisión Técnica</h3>
-        <form id="form-revision" class="custom-form">
-          <div class="input-row">
-            <select id="select-bus-rev" required>
-              <option value="">Seleccione Autobús...</option>
-            </select>
-            <input type="date" id="fecha-rev" required>
-            <input type="text" id="diag-rev" placeholder="Diagnóstico" required>
-          </div>
-          <button type="submit" class="btn-primary">Guardar Revisión</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-revisiones" class="data-list"></ul>
-      </div>
-
-      <!-- Submódulo: Reparaciones -->
-      <div class="card form-card mt-2">
-        <h3>Registrar Reparación</h3>
-        <form id="form-reparacion" class="custom-form">
-          <div class="input-row">
-            <select id="select-rev-rep" required>
-              <option value="">Seleccione Revisión...</option>
-            </select>
-            <input type="text" id="codigo-rep" placeholder="Código de Reparación" required>
-            <input type="text" id="tiempo-rep" placeholder="Tiempo empleado (Ej: 2h 30m)" required>
-            <input type="text" id="comentario-rep" placeholder="Comentarios">
-          </div>
-          <button type="submit" class="btn-primary">Guardar Reparación</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-reparaciones" class="data-list"></ul>
-      </div>
-    </section>
-
-    <!-- ==========================================
-             MÓDULO 4: OPERACIONES (Rutas, Lugares, Servicios)
-             ========================================== -->
-    <section id="operaciones" class="content-section">
-      <header class="section-header">
-        <h1>Operaciones y Logística</h1>
-        <p>Gestión de destinos, paradas y horarios.</p>
-      </header>
-
-      <!-- Submódulo: Rutas -->
-      <div class="card form-card">
-        <h3>Registrar Ruta Comercial</h3>
-        <form id="form-ruta" class="custom-form">
-          <div class="input-row">
-            <input type="text" id="nombre-ruta" placeholder="Nombre de la Ruta" required>
-            <input type="number" step="0.01" id="precio-ruta" placeholder="Tarifa ($)" required>
-          </div>
-          <button type="submit" class="btn-primary">Guardar Ruta</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-rutas" class="data-list"></ul>
-      </div>
-
-      <!-- Submódulo: Lugares (Paradas) -->
-      <div class="card form-card mt-2">
-        <h3>Registrar Parada / Lugar</h3>
-        <form id="form-lugar" class="custom-form">
-          <div class="input-row">
-            <select id="select-ruta-lugar" required>
-              <option value="">Seleccione la Ruta...</option>
-            </select>
-            <input type="number" id="orden-lugar" placeholder="Orden (Ej: 1, 2, 3)" required>
-            <input type="text" id="nombre-lugar" placeholder="Nombre del Lugar" required>
-            <input type="text" id="actividad-lugar" placeholder="Actividad (Opcional)">
-            <input type="time" id="tiempo-desde" required>
-            <input type="time" id="tiempo-parada">
-          </div>
-          <button type="submit" class="btn-primary">Guardar Parada</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-lugares" class="data-list"></ul>
-      </div>
-
-      <!-- Submódulo: Servicios Diarios -->
-      <div class="card form-card mt-2">
-        <h3>Programar Servicio Diario</h3>
-        <form id="form-servicio" class="custom-form">
-          <div class="input-row">
-            <select id="select-ruta" required>
-              <option value="">Seleccione Ruta...</option>
-            </select>
-            <select id="select-autobus" required>
-              <option value="">Seleccione Autobús...</option>
-            </select>
-            <select id="select-conductor" required>
-              <option value="">Seleccione Conductor...</option>
-            </select>
-            <input type="time" id="hora-salida" required>
-            <input type="text" id="dias-prog" placeholder="Días (Ej: L-V)" required>
-          </div>
-          <button type="submit" class="btn-primary">Guardar Servicio</button>
-        </form>
-      </div>
-      <div class="card list-card mt-2">
-        <ul id="lista-servicios" class="data-list"></ul>
-      </div>
-    </section>
-
-  </main>
+        <div class="card form-card mt-2">
+          <h3>Programar Servicio Diario</h3>
+          <form id="form-servicio" class="custom-form">
+            <div class="input-row">
+              <select id="select-ruta" required>
+                <option value="">Seleccione Ruta...</option>
+              </select>
+              <select id="select-autobus" required>
+                <option value="">Seleccione Autobús...</option>
+              </select>
+              <select id="select-conductor" required>
+                <option value="">Seleccione Conductor...</option>
+              </select>
+              <input type="time" id="hora-salida" required>
+              <input type="text" id="dias-prog" placeholder="Días (Ej: L-V)" required>
+            </div>
+            <button type="submit" class="btn-primary">Guardar Servicio</button>
+          </form>
+        </div>
+        <div class="card list-card mt-2">
+          <ul id="lista-servicios" class="data-list"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
