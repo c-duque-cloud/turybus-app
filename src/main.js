@@ -32,7 +32,7 @@ initFlota(recargarTodo);
 initVentas(recargarTodo);
 
 // ==========================================
-// LÓGICA DE AUTENTICACIÓN RESTAURADA
+// LÓGICA DE AUTENTICACIÓN 
 // ==========================================
 async function verificarSesion() {
   const { data: { session }, error } = await supabase.auth.getSession();

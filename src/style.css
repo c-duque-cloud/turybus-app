@@ -311,7 +311,7 @@ input:focus {
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* 2. Nueva animación de entrada para las métricas */
+/* 2. Animación de entrada para las métricas */
 @keyframes slideUpFade {
   from {
     opacity: 0;
