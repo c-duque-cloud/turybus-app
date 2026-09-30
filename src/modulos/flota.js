@@ -15,7 +15,7 @@ export async function cargarAutobuses(callbackRecarga) {
   if (selectBusRev) selectBusRev.innerHTML = '<option value="">Seleccione Autobús...</option>';
 
   data.forEach(bus => {
-    const principal = `<strong>[${bus.matricula}]</strong> ${bus.fabricante} ${bus.modelo} - ${bus.numero_plazas} plz`;
+    const principal = `<strong>[${bus.matricula}]</strong> Mod: ${bus.modelo} | Fab: ${bus.fabricante}  | 💺 ${bus.numero_plazas} plz`;
     const btnEdit = crearBotonEditar(document.getElementById('form-autobus'), bus.matricula, { 'matricula-bus': bus.matricula, 'modelo-bus': bus.modelo, 'fabricante-bus': bus.fabricante, 'plazas-bus': bus.numero_plazas });
     const btnDel = crearBotonEliminar('autobuses', 'matricula', bus.matricula, bus.matricula, callbackRecarga);
 

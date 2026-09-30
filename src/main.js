@@ -1,6 +1,5 @@
 import { supabase } from '../supabase.js';
 
-// Importación de módulos
 import { cargarRutas, cargarLugares, cargarServicios, initOperaciones } from './modulos/operaciones.js';
 import { cargarAutobuses, cargarConductores, cargarRevisiones, cargarReparaciones, initFlota } from './modulos/flota.js';
 import { cargarPasajeros, cargarBilletes, initVentas } from './modulos/ventas.js';
@@ -20,40 +19,36 @@ function recargarTodo() {
   cargarRutas(recargarTodo);
   cargarLugares(recargarTodo);
   cargarServicios(recargarTodo);
-
   cargarAutobuses(recargarTodo);
   cargarConductores(recargarTodo);
   cargarRevisiones(recargarTodo);
   cargarReparaciones(recargarTodo);
-
   cargarPasajeros(recargarTodo);
   cargarBilletes(recargarTodo);
 }
 
-// Inicialización de los formularios
 initOperaciones(recargarTodo);
 initFlota(recargarTodo);
 initVentas(recargarTodo);
 
 // ==========================================
-// LÓGICA DE AUTENTICACIÓN (LOGIN)
+// LÓGICA DE AUTENTICACIÓN RESTAURADA
 // ==========================================
 async function verificarSesion() {
   const { data: { session }, error } = await supabase.auth.getSession();
 
   if (session) {
-    // Sesión activa: Oculta login, muestra app, descarga datos
+    // Si hay sesión: Muestra la app y descarga los datos de Supabase
     vistaLogin.style.display = 'none';
     appContenedor.style.display = 'block';
     recargarTodo();
   } else {
-    // Sin sesión: Muestra login, oculta app
+    // Si no hay sesión: Muestra solo el login
     vistaLogin.style.display = 'flex';
     appContenedor.style.display = 'none';
   }
 }
 
-// Evento de Iniciar Sesión
 if (formLogin) {
   formLogin.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -75,20 +70,19 @@ if (formLogin) {
   });
 }
 
-// Evento de Cerrar Sesión
 if (btnLogout) {
   btnLogout.addEventListener('click', async (e) => {
     e.preventDefault();
     const confirmar = confirm('¿Deseas cerrar la sesión segura?');
     if (confirmar) {
       await supabase.auth.signOut();
-      verificarSesion(); // Regresa al estado de login
+      verificarSesion(); // Regresa al login
     }
   });
 }
 
 // ==========================================
-// NAVEGACIÓN DE PESTAÑAS Y ARRANQUE
+// NAVEGACIÓN Y ARRANQUE
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   const navItems = document.querySelectorAll('.nav-item');
@@ -96,16 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
-      // Ignoramos el clic si es el botón de cerrar sesión
+      // Evita que el botón de cerrar sesión active la lógica de pestañas
       if (e.target.id === 'btn-logout') return;
 
       e.preventDefault();
-
-      // Limpiamos clases activas
       navItems.forEach(nav => nav.classList.remove('active'));
       sections.forEach(section => section.classList.remove('active'));
 
-      // Activamos la pestaña seleccionada
       e.target.classList.add('active');
       const targetId = e.target.getAttribute('data-target');
       const targetSection = document.getElementById(targetId);
@@ -115,6 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Verificamos el estado del usuario al abrir la página
+  // Verificamos quién entra en lugar de forzar la carga
   verificarSesion();
 });

@@ -296,3 +296,53 @@ input:focus {
   background-color: var(--primary-color);
   color: #fff;
 }
+
+/* =========================================
+   ANIMACIONES DEL DASHBOARD
+   ========================================= */
+
+/* 1. Efecto de elevación al pasar el mouse sobre cualquier tarjeta */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* 2. Nueva animación de entrada para las métricas */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. Aplicamos la animación con retrasos en cascada (Staggered effect) */
+.status-cards .card {
+  /* backwards asegura que sean invisibles antes de empezar a animarse */
+  animation: slideUpFade 0.6s ease backwards;
+}
+
+/* Retrasamos la entrada de cada tarjeta para que aparezcan una tras otra */
+.status-cards .card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.status-cards .card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.status-cards .card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.status-cards .card:nth-child(4) {
+  animation-delay: 0.4s;
+}
