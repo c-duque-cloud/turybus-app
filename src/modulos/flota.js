@@ -91,7 +91,19 @@ export async function cargarReparaciones(callbackRecarga) {
 export function initFlota(callbackRecarga) {
   document.getElementById('form-autobus')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    await guardarOActualizar('autobuses', 'matricula', { matricula: document.getElementById('matricula-bus').value, modelo: document.getElementById('modelo-bus').value, fabricante: document.getElementById('fabricante-bus').value, numero_plazas: parseInt(document.getElementById('plazas-bus').value) }, e.target, callbackRecarga);
+    const numero_plazas = parseInt(document.getElementById('plazas-bus').value);
+    
+    if (numero_plazas < 1) {
+      Swal.fire('Atención', 'El número de plazas debe ser mayor a 0', 'warning');
+      return;
+    }
+
+    await guardarOActualizar('autobuses', 'matricula', { 
+      matricula: document.getElementById('matricula-bus').value, 
+      modelo: document.getElementById('modelo-bus').value, 
+      fabricante: document.getElementById('fabricante-bus').value, 
+      numero_plazas: numero_plazas 
+    }, e.target, callbackRecarga);
   });
 
   document.getElementById('form-conductor')?.addEventListener('submit', async (e) => {

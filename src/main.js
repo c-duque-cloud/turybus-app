@@ -15,7 +15,26 @@ const btnLogout = document.getElementById('btn-logout');
 // ==========================================
 // DESCARGA Y MAPEO DE DATOS
 // ==========================================
+async function actualizarDashboard() {
+  try {
+    const [buses, servicios, boletos] = await Promise.all([
+      supabase.from('autobuses').select('*', { count: 'exact', head: true }),
+      supabase.from('servicios_diarios').select('*', { count: 'exact', head: true }),
+      supabase.from('billetes').select('*', { count: 'exact', head: true })
+    ]);
+
+    const numBuses = buses.count || 0;
+    document.getElementById('dash-autobuses').textContent = numBuses;
+    document.getElementById('dash-en-ruta').textContent = Math.floor(numBuses / 2); // Simulado por ahora
+    document.getElementById('dash-servicios').textContent = servicios.count || 0;
+    document.getElementById('dash-boletos').textContent = boletos.count || 0;
+  } catch (err) {
+    console.error("Error al actualizar dashboard:", err);
+  }
+}
+
 function recargarTodo() {
+  actualizarDashboard();
   cargarRutas(recargarTodo);
   cargarLugares(recargarTodo);
   cargarServicios(recargarTodo);
@@ -39,13 +58,13 @@ async function verificarSesion() {
 
   if (session) {
     // Si hay sesión: Muestra la app y descarga los datos de Supabase
-    vistaLogin.style.display = 'none';
-    appContenedor.style.display = 'block';
+    vistaLogin.classList.add('hidden');
+    appContenedor.classList.remove('hidden');
     recargarTodo();
   } else {
     // Si no hay sesión: Muestra solo el login
-    vistaLogin.style.display = 'flex';
-    appContenedor.style.display = 'none';
+    vistaLogin.classList.remove('hidden');
+    appContenedor.classList.add('hidden');
   }
 }
 
@@ -61,10 +80,21 @@ if (formLogin) {
     });
 
     if (error) {
-      alert('Credenciales incorrectas o usuario no encontrado.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error de Autenticación',
+        text: 'Credenciales incorrectas o usuario no encontrado.'
+      });
       console.error(error);
     } else {
       formLogin.reset();
+      Swal.fire({
+        icon: 'success',
+        title: '¡Bienvenido!',
+        text: 'Sesión iniciada correctamente',
+        timer: 1500,
+        showConfirmButton: false
+      });
       verificarSesion();
     }
   });
@@ -73,8 +103,16 @@ if (formLogin) {
 if (btnLogout) {
   btnLogout.addEventListener('click', async (e) => {
     e.preventDefault();
-    const confirmar = confirm('¿Deseas cerrar la sesión segura?');
-    if (confirmar) {
+    const result = await Swal.fire({
+      title: 'Cerrar Sesión',
+      text: '¿Deseas cerrar tu sesión segura?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, salir',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (result.isConfirmed) {
       await supabase.auth.signOut();
       verificarSesion(); // Regresa al login
     }

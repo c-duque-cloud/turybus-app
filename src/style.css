@@ -346,3 +346,31 @@ input:focus {
 .status-cards .card:nth-child(4) {
   animation-delay: 0.4s;
 }
+
+
+/* =========================================
+   UTILITY CLASSES (Added for Improvements)
+   ========================================= */
+.hidden {
+  display: none !important;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.btn-delete {
+  margin-left: 15px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #e60000;
+}

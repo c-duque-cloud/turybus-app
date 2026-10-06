@@ -19,7 +19,7 @@
       <form id="form-login" class="custom-form">
         <input type="email" id="email-login" class="input-login" placeholder="Correo Electrónico" required>
         <input type="password" id="password-login" class="input-login" placeholder="Contraseña" required>
-        <button type="submit" class="btn-primary" style="width: 100%;">Iniciar Sesión</button>
+        <button type="submit" class="btn-primary w-full">Iniciar Sesión</button>
       </form>
     </div>
   </div>
@@ -27,7 +27,7 @@
   <!-- ==========================================
          CONTENEDOR DE LA APLICACIÓN
          ========================================== -->
-  <div id="app-contenedor" style="display: none;">
+  <div id="app-contenedor" class="hidden">
 
     <nav class="navbar">
       <div class="logo">🚌 TURYBUS Charly's</div>
@@ -54,19 +54,19 @@
         <div class="status-cards">
           <div class="card border-green">
             <h3>Autobuses en Base</h3>
-            <p class="number">12</p><span class="badge success">Disponibles</span>
+            <p class="number" id="dash-autobuses">0</p><span class="badge success">Disponibles</span>
           </div>
           <div class="card border-yellow">
             <h3>Autobuses en Ruta</h3>
-            <p class="number">8</p><span class="badge warning">Operando</span>
+            <p class="number" id="dash-en-ruta">0</p><span class="badge warning">Operando</span>
           </div>
           <div class="card border-blue">
-            <h3>Asientos Libres (Hoy)</h3>
-            <p class="number">145</p><span class="badge info">Listos para venta</span>
+            <h3>Total de Servicios</h3>
+            <p class="number" id="dash-servicios">0</p><span class="badge info">Programados</span>
           </div>
           <div class="card border-dark">
             <h3>Boletos Vendidos</h3>
-            <p class="number">320</p><span class="badge primary">Corte actual</span>
+            <p class="number" id="dash-boletos">0</p><span class="badge primary">Corte actual</span>
           </div>
         </div>
       </section>
@@ -253,6 +253,7 @@
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="module" src="/src/main.js"></script>
 </body>
 
